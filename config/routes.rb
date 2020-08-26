@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'sign_up/create'
-      get 'sign_up/show'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-      get 'sign_in/create'
-      get 'sign_in/show'
+      post '/sign_in' => 'sign_in#create'
+      get '/sign_in' => 'sign_in#show'
+      post '/sign_up' => 'sign_up#create'
+      get '/sign_up' => 'sign_up#show'
+
+      ## this generated routes didnt work for me
+      # get 'sign_up/create'
+      # get 'sign_up/show'
     end
   end
   root 'home#index'
