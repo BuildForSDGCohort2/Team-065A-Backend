@@ -11,9 +11,8 @@ class Api::V1::SignInController < ApplicationController
     end
     param_password = params[:login][:password]
 
-    # make sure we can sign in using both email and full name
-    # TODO will add phone number later
-    user = User.find_by(email: param_email) || User.find_by(full_name: param_email)
+    # make sure we can sign in using both email
+    user = User.find_by(email: param_email) 
 
     # check if password is correct
     if user&.authenticate(param_password)
