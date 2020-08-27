@@ -15,7 +15,8 @@ class Api::V1::SignUpController < ApplicationController
     end
 
     # check if usertypes contains param[usertype]
-    unless usertypes.include?(params[:users][:user_type].downcase)
+    usertype = params[:users][:user_type]
+    if usertype.nil? || !usertypes.include?(usertype.downcase)
       render json: { status: 'Error', message: 'Invalid user type' }
       return
     end

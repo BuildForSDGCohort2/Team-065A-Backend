@@ -8,15 +8,15 @@ class User < ApplicationRecord
   # regex from Micheal Hartl book very useful will work on it later
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
-  #regex may be buggy since i just came up with something - supports 
-  #all african numbers
-  VALID_PHONE_REGEX = /\A((\+\d{11,15})|(^+\d{8,15}))\z.freeze
+  # regex may be buggy since i just came up with something - supports
+  # all african numbers
+  VALID_PHONE_REGEX = /\A((\+\d{11,15})|(^+\d{8,15}))\z/.freeze
 
-  #validate usertype
+  # validate usertype
   validates :user_type, presence: true
 
-  #validate phone allow_blank since its optional on the signup page
-  validates :phone, allow_blank: true, format: { with: VALID_PHONE_REGEX}
+  # validate phone allow_blank since its optional on the signup page
+  validates :phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }
 
   # validate email
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
