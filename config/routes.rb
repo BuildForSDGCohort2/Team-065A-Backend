@@ -6,6 +6,13 @@ Rails.application.routes.draw do
       post '/sign_up' => 'sign_up#create'
       get '/sign_up' => 'sign_up#show'
 
+      post 'users' => 'users#update'
+      get 'users' => 'users#show'
+      get 'users' => 'users#show_all'
+
+      get 'users' => 'users#destroy'
+      delete 'users' => 'users#destroy'
+
       ## this generated routes didnt work for me
       # get 'sign_up/create'
       # get 'sign_up/show'
