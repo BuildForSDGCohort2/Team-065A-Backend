@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  belongs_to :userref, polymorphic: true
+
   # make sure we convert all lazy emails to downcase
   before_save { self.email = email.downcase }
 
@@ -24,4 +26,7 @@ class User < ApplicationRecord
   # validate password
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }
+
+  after_save do
+  end
 end
