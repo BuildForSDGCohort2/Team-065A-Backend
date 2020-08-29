@@ -14,7 +14,7 @@ class CreateTeachers < ActiveRecord::Migration[6.0]
       t.string :certificate
       t.integer :year_from
       t.integer :year_to
-      t.string :certificate_proof #might be pdf,jpg,png
+      t.string :certificate_proof # might be pdf,jpg,png
 
       t.timestamps
     end
@@ -45,7 +45,7 @@ class CreateTeachers < ActiveRecord::Migration[6.0]
 
     create_table :ratings do |t|
       t.belongs_to :review
-      t.float :rate, :default 5.0, :limit 5.0
+      t.float :rate, default: 5.0, limit: 5.0
       t.timestamps
     end
 
@@ -55,6 +55,5 @@ class CreateTeachers < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-
   end
 end
