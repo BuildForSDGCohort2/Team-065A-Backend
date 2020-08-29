@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  # update a particular user
+  # update the profile of a particular user
   def update
     @user = check_user_find_nil
     if @user.update(params) # change this
@@ -10,6 +10,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   # show a particular user / all users
+  # show all users might be terrible buh lemme just put it there
   def show
     @user = params[:id].nil? ? User.all : check_user_find_nil
     check_user_nil('Success', 'User does not exist', @user)
@@ -27,6 +28,10 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
+  def update_params
+    params.require(:update).permit(:email, :phone, :gender, :address, :phone, :avatar, :state, :country)
+  end
 
   def check_user_nil(success_msg, error_msg, data_info)
     if !@user.nil?

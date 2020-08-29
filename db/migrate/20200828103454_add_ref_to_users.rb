@@ -5,5 +5,6 @@ class AddRefToUsers < ActiveRecord::Migration[6.0]
     add_column :users, :country, :string
     add_column :users, :state, :string
     add_column :users, :address, :string
+    add_column :users, :avatar, :string
   end
 end

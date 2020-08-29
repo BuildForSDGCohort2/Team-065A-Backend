@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
+
   belongs_to :userref, polymorphic: true
 
   # make sure we convert all lazy emails to downcase
@@ -27,6 +29,4 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }
 
-  after_save do
-  end
 end
