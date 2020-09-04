@@ -1,9 +1,7 @@
 class CreateTeachers < ActiveRecord::Migration[6.0]
   def change
     create_table :teachers do |t|
-      t.float :rating
       t.string :description
-      t.string :courses
 
       t.timestamps
     end
@@ -21,13 +19,7 @@ class CreateTeachers < ActiveRecord::Migration[6.0]
 
     create_table :courses do |t|
       t.string :coursename
-      t.belongs_to :student
       t.timestamps
-    end
-
-    create_table :teachers_courses, id: false do |t|
-      t.belongs_to :teacher
-      t.belongs_to :course
     end
 
     create_table :reviews do |t|
@@ -39,19 +31,15 @@ class CreateTeachers < ActiveRecord::Migration[6.0]
       t.string :owner
       t.string :teacher
       t.string :content
+      t.float :rating, limit: 5, default: 5.0
 
-      t.timestamps
-    end
-
-    create_table :ratings do |t|
-      t.belongs_to :review
-      t.float :rate, default: 5.0, limit: 5.0
       t.timestamps
     end
 
     create_table :posts do |t|
       t.belongs_to :teacher
       t.string :content
+      t.string :title
 
       t.timestamps
     end

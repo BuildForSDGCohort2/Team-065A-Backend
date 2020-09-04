@@ -48,7 +48,7 @@ class Api::V1::SignUpController < ApplicationController
   end
 
   def check_user_type?
-    usertypemodel = @usertype_models[@usertypes.find_index(params[:user_type])].new
-    @user.save && usertypemodel.save
+    @user.userref = @usertype_models[@usertypes.find_index(params[:users][:user_type])].new
+    @user.save
   end
 end

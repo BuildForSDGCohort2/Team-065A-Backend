@@ -1,24 +1,25 @@
+require_relative '../../concerns/helpers.rb'
+
 class Api::V1::UsersController < ApplicationController
   # update the profile of a particular user
   def update
-    @user = check_user_find_nil
-    if @user.update(params) # change this
+    @user = Helpers.check_user_find_nil(params[:id])
+    if @user.update(update_params) # change this
       render json: { status: 'Success', message: 'Updated Successfully', data: @user }
     else
       render json: { status: 'Error', message: 'Error updating', data: @user.errors.full_messages }
     end
   end
 
-  # show a particular user / all users
-  # show all users might be terrible buh lemme just put it there
+  # show a particular user
   def show
-    @user = params[:id].nil? ? User.all : check_user_find_nil
+    @user = Helpers.show_each_user(params[:id])
     check_user_nil('Success', 'User does not exist', @user)
   end
 
   # destroy a user
   def destroy
-    @user = check_user_find_nil
+    @user = Helpers.check_user_find_nil(params[:id])
     if !@user.nil?
       @user.destroy
       render json: { status: 'Success', message: 'Successfully deleted' }
@@ -39,11 +40,5 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { status: 'Error', message: error_msg }
     end
-  end
-
-  def check_user_find_nil
-    User.find(params[:id])
-  rescue StandardError
-    nil
   end
 end

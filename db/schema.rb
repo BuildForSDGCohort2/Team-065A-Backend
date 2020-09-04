@@ -10,14 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_103454) do
+ActiveRecord::Schema.define(version: 2020_09_04_075507) do
 
   create_table "courses", force: :cascade do |t|
     t.string "coursename"
-    t.integer "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["student_id"], name: "index_courses_on_student_id"
   end
 
   create_table "educations", force: :cascade do |t|
@@ -35,27 +33,26 @@ ActiveRecord::Schema.define(version: 2020_08_28_103454) do
   create_table "others", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "mycourses"
+    t.integer "age"
+    t.string "level"
   end
 
   create_table "parents", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "mycourses"
+    t.integer "age"
+    t.string "level"
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer "teacher_id"
-    t.string "content"
+    t.text "content", limit: 4294967295
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
     t.index ["teacher_id"], name: "index_posts_on_teacher_id"
-  end
-
-  create_table "ratings", force: :cascade do |t|
-    t.integer "review_id"
-    t.float "rate", limit: 5, default: 5.0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["review_id"], name: "index_ratings_on_review_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -66,9 +63,10 @@ ActiveRecord::Schema.define(version: 2020_08_28_103454) do
     t.integer "student_id"
     t.string "owner"
     t.string "teacher"
-    t.string "content"
+    t.text "content", limit: 16777215
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "rating", limit: 5, default: 5.0
     t.index ["other_id"], name: "index_reviews_on_other_id"
     t.index ["parent_id"], name: "index_reviews_on_parent_id"
     t.index ["school_id"], name: "index_reviews_on_school_id"
@@ -79,22 +77,26 @@ ActiveRecord::Schema.define(version: 2020_08_28_103454) do
   create_table "schools", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "mycourses"
+    t.integer "age"
+    t.string "level"
   end
 
   create_table "students", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "age"
+    t.string "level"
+    t.string "mycourses"
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.float "rating"
-    t.string "description"
-    t.string "courses"
+    t.text "description", limit: 16777215
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "teachers_courses", id: false, force: :cascade do |t|
+  create_table "teachers_courses", force: :cascade do |t|
     t.integer "teacher_id"
     t.integer "course_id"
     t.index ["course_id"], name: "index_teachers_courses_on_course_id"
