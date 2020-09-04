@@ -1,6 +1,11 @@
 class User < ApplicationRecord
+  belongs_to :userref, class_name: 'User', polymorphic: true, optional: true
+  mount_uploader :avatar, AvatarUploader
+
   # make sure we convert all lazy emails to downcase
-  before_save { self.email = email.downcase }
+  before_save do
+    self.email = email.downcase
+  end
 
   # validate full_name to allow maximum of 50 letters
   validates :full_name, presence: true, length: { maximum: 50 }
@@ -23,5 +28,5 @@ class User < ApplicationRecord
 
   # validate password
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 8 }, if: :password
 end
