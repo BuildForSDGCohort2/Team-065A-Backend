@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :reset_token
+  #:remember_token, :activation_token,
   belongs_to :userref, class_name: 'User', polymorphic: true, optional: true
   mount_uploader :avatar, AvatarUploader
 
@@ -29,4 +31,38 @@ class User < ApplicationRecord
   # validate password
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }, if: :password
+
+  # returns a hash of the string
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  # Returns a random token.
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  # Sets the password reset attributes.
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:forgot_password_digest, User.digest(reset_token))
+    update_attribute(:forgot_password_sent_at, Time.zone.now)
+    end
+
+  # Sends password reset email.
+  def send_password_reset_email
+    UserMailer.forgot_password(self).deliver_now
+  end
+
+  def password_reset_expired?
+    forgot_password_sent_at < 2.hours.ago
+    end
+
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+
+    BCrypt::Password.new(digest).is_password?(token)
+  end
 end

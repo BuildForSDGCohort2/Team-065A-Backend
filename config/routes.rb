@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'forgot_password/new'
-      get 'forgot_password/create'
-      get 'forgot_password/edit'
-    end
-  end
-  namespace :api do
-    namespace :v1 do
       post '/sign_in' => 'sign_in#create'
       get '/sign_in' => 'sign_in#show'
       post '/sign_up' => 'sign_up#create'
@@ -47,6 +40,9 @@ Rails.application.routes.draw do
       post '/educations' => 'educations#create'
       delete '/educations' => 'educations#destroy'
       patch '/educations' => 'educations#update'
+
+      post '/forgot_password' => 'forgot_password#create'
+      resources :forgot_password, only: [:edit]
 
       ## this generated routes didnt work for me
       # get 'sign_up/create'

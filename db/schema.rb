@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_075507) do
+ActiveRecord::Schema.define(version: 2020_09_10_055404) do
 
   create_table "courses", force: :cascade do |t|
     t.string "coursename"
@@ -31,17 +31,17 @@ ActiveRecord::Schema.define(version: 2020_09_04_075507) do
   end
 
   create_table "others", force: :cascade do |t|
+    t.string "mycourses"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "mycourses"
     t.integer "age"
     t.string "level"
   end
 
   create_table "parents", force: :cascade do |t|
+    t.string "mycourses"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "mycourses"
     t.integer "age"
     t.string "level"
   end
@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(version: 2020_09_04_075507) do
   create_table "posts", force: :cascade do |t|
     t.integer "teacher_id"
     t.text "content", limit: 4294967295
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
     t.index ["teacher_id"], name: "index_posts_on_teacher_id"
   end
 
@@ -64,9 +64,9 @@ ActiveRecord::Schema.define(version: 2020_09_04_075507) do
     t.string "owner"
     t.string "teacher"
     t.text "content", limit: 16777215
+    t.float "rating", limit: 5, default: 5.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "rating", limit: 5, default: 5.0
     t.index ["other_id"], name: "index_reviews_on_other_id"
     t.index ["parent_id"], name: "index_reviews_on_parent_id"
     t.index ["school_id"], name: "index_reviews_on_school_id"
@@ -75,19 +75,19 @@ ActiveRecord::Schema.define(version: 2020_09_04_075507) do
   end
 
   create_table "schools", force: :cascade do |t|
+    t.string "mycourses"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "mycourses"
     t.integer "age"
     t.string "level"
   end
 
   create_table "students", force: :cascade do |t|
+    t.string "mycourses"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "age"
     t.string "level"
-    t.string "mycourses"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -118,6 +118,8 @@ ActiveRecord::Schema.define(version: 2020_09_04_075507) do
     t.string "state"
     t.string "address"
     t.string "avatar"
+    t.string "forgot_password_digest"
+    t.datetime "forgot_password_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["userref_type", "userref_id"], name: "index_users_on_userref_type_and_userref_id"
   end
