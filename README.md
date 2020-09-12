@@ -24,6 +24,12 @@ i.e api/v1/sign_in
 
 i.e api/v1/sign_up
 
+### Forgot Password - forgot_password
+
+i.e api/v1/forgot_password
+
+includes the email to be sent to the user, hence the token would be used in the custom url when resetting the password
+
 ---
 
 ### User - users
@@ -74,20 +80,21 @@ i.e api/v1/sign_up
 
 ---
 
-| Endpoints    | Requests | Hash      | Params                                                                  |
-| ------------ | -------- | --------- | ----------------------------------------------------------------------- |
-| sign_in      | C        | login     | email, password                                                         |
-| sign_up      | C        | users     | email, password, password_confirmation, phone, full_name, user_type     |
-| users        | RUD      | update    | id, email, gender, address, phone, avatar, state, country               |
-| teachers     | RU       | ---       | id, description                                                         |
-| parents      | U        | user      | age, level, mycourses                                                   |
-| students     | U        | student   | age, level, mycourses                                                   |
-| schools      | U        | user      | age, level, mycourses                                                   |
-| others       | U        | user      | age, level, mycourses                                                   |
-| reviews      | CUD      | review    | id, no, content, rating, owner                                          |
-| educations\* | CUD      | education | id, no, institution, year_from, year_to, certificate, certificate_proof |
-| posts        | CUD      | post      | id, no, title, content                                                  |
-| courses\*    | CRUD     | ---       | id, no,coursename                                                       |
+| Endpoints       | Requests | Hash      | Params                                                                  |
+| --------------- | -------- | --------- | ----------------------------------------------------------------------- |
+| sign_in         | C        | login     | email, password,remember                                                |
+| sign_up         | C        | users     | email, password, password_confirmation, phone, full_name, user_type     |
+| users           | RUD      | update    | id, email, gender, address, phone, avatar, state, country               |
+| teachers        | RU       | ---       | id, description                                                         |
+| parents         | U        | user      | age, level, mycourses                                                   |
+| students        | U        | student   | age, level, mycourses                                                   |
+| schools         | U        | user      | age, level, mycourses                                                   |
+| others          | U        | user      | age, level, mycourses                                                   |
+| reviews         | CUD      | review    | id, no, content, rating, owner                                          |
+| educations\*    | CUD      | education | id, no, institution, year_from, year_to, certificate, certificate_proof |
+| posts           | CUD      | post      | id, no, title, content                                                  |
+| courses\*       | CRUD     | ---       | id, no,coursename                                                       |
+| forgot_password | CU       | users     | id, email\*(no hash on this),password,password_confirmation             |
 
 <br>
 
