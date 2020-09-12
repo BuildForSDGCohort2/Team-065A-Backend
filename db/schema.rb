@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_055404) do
+ActiveRecord::Schema.define(version: 2020_09_11_103438) do
 
   create_table "courses", force: :cascade do |t|
     t.string "coursename"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2020_09_10_055404) do
     t.string "avatar"
     t.string "forgot_password_digest"
     t.datetime "forgot_password_sent_at"
+    t.string "remember_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["userref_type", "userref_id"], name: "index_users_on_userref_type_and_userref_id"
   end

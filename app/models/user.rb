@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :reset_token
-  #:remember_token, :activation_token,
+  attr_accessor :reset_token, :remember_token
   belongs_to :userref, class_name: 'User', polymorphic: true, optional: true
   mount_uploader :avatar, AvatarUploader
 
@@ -64,5 +63,14 @@ class User < ApplicationRecord
     return false if digest.nil?
 
     BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
   end
 end

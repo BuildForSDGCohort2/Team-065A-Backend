@@ -1,3 +1,5 @@
+require_relative '../../concerns/helpers.rb'
+
 class Api::V1::SignInController < ApplicationController
   # post endpoint for sign in
   def create
@@ -12,10 +14,11 @@ class Api::V1::SignInController < ApplicationController
     param_password = params[:login][:password]
 
     # make sure we can sign in using both email
-    user = User.find_by(email: param_email) 
+    user = User.find_by(email: param_email)
 
     # check if password is correct
     if user&.authenticate(param_password)
+      params[:login][:remember_me] == '1' ? Helpers.remember(user) : Helpers.forget(user)
       render json: { status: 'Success', message: 'Signed In Successfully' }
     else
       render json: { status: 'Error', message: 'Invalid Email/Password' }
