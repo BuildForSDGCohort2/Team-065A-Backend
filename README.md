@@ -90,9 +90,9 @@ includes the email to be sent to the user, hence the token would be used in the 
 | students        | U        | student   | age, level, mycourses                                                   |
 | schools         | U        | user      | age, level, mycourses                                                   |
 | others          | U        | user      | age, level, mycourses                                                   |
-| reviews         | CUD      | review    | id, no, content, rating, owner                                          |
+| reviews         | CRUD     | review    | id, no, content, rating, owner                                          |
 | educations\*    | CUD      | education | id, no, institution, year_from, year_to, certificate, certificate_proof |
-| posts           | CUD      | post      | id, no, title, content                                                  |
+| posts           | CRUD     | post      | id, no, title, content                                                  |
 | courses\*       | CRUD     | ---       | id, no,coursename                                                       |
 | forgot_password | CU       | users     | id, email\*(no hash on this),password,password_confirmation             |
 
@@ -109,6 +109,22 @@ R - Read or Show - GET
 U - Update or Edit - PATCH
 
 D - destroy or delete - DELETE
+
+---
+
+---
+
+### Special Cases
+
+For **courses** endpoint with Request **show**. There are two possibilities :
+
+- passing the **coursename** as a param to filter all teachers according to a specific course type
+- passing nothing as param to sort all teachers according to the course type
+
+For **post** and **review** endpoint with Request **show**. There are also two possibilities :
+
+- passing the **id** as a param to get all posts or all reviews pertaining to a specific teacher or user respectively.
+- passing nothing as param to get all posts or all reviews respectively.
 
 ---
 
