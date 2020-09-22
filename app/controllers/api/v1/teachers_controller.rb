@@ -10,7 +10,7 @@ class Api::V1::TeachersController < ApplicationController
     @user = Helpers.check_user_find_nil(params[:id])
     @teacher = @user.userref
     if @teacher.update(description: params[:description])
-      render json: { status: 'Success', message: 'Updated Successfully', data: @teacher }
+      render json: { status: 'Success', message: 'Updated Successfully', data: TeacherSerializer.new(@teacher).as_json }
     else
       render json: { status: 'Error', message: 'Error updating', data: @teacher.errors.full_messages }
     end

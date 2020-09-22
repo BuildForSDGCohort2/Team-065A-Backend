@@ -6,7 +6,7 @@ class Api::V1::EducationsController < ApplicationController
     @user.userref.educations << Education.new(new_params)
     @education = @user.userref.educations.last
     if @education.save
-      render json: { status: 'Success', message: 'Successfully created', data: @education }
+      render json: { status: 'Success', message: 'Successfully created', data: EducationSerializer.new(@education).as_json }
     else
       render json: { status: 'Error', message: 'Course creation Failed', more: @education.errors.full_messages }
     end
@@ -16,7 +16,7 @@ class Api::V1::EducationsController < ApplicationController
     @user = Helpers.check_user_find_nil(params[:id])
     @education = @user.userref.educations[params[:no].to_i]
     if @education.update(new_params) # change this
-      render json: { status: 'Success', message: 'Updated Successfully', data: @education }
+      render json: { status: 'Success', message: 'Updated Successfully', data: EducationSerializer.new(@education).as_json }
     else
       render json: { status: 'Error', message: 'Error updating', data: @education.errors.full_messages }
     end

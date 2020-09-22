@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
       get '/reviews' => 'reviews#show'
       post '/reviews' => 'reviews#create'
+      patch '/reviews' => 'reviews#update'
       delete '/reviews' => 'reviews#destroy'
 
       get '/posts' => 'posts#show'

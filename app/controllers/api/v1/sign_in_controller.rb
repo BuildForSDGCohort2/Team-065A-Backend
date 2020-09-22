@@ -19,7 +19,7 @@ class Api::V1::SignInController < ApplicationController
     # check if password is correct
     if user&.authenticate(param_password)
       params[:login][:remember_me] == '1' ? Helpers.remember(user) : Helpers.forget(user)
-      render json: { status: 'Success', message: 'Signed In Successfully' }
+      render json: { status: 'Success', message: 'Signed In Successfully', data: UserSerializer.new(user).as_json }
     else
       render json: { status: 'Error', message: 'Invalid Email/Password' }
     end

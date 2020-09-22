@@ -5,27 +5,25 @@ class Helpers < ApplicationController
       return nil if user.nil?
 
       usertype = user.userref
-      info = { profile: user, info: usertype, reviews: usertype.reviews }
+      info = { profile: UserSerializer.new(user).as_json, reviews: usertype.reviews }
       if usertype.is_a? Teacher
-        info['courses'] = usertype.courses
-        info['posts'] = usertype.posts
-        info['educations'] = usertype.educations
-        info['rating'] = get_avg_rating_from_reviews(usertype.reviews)
+        return { profile: TeacherSerializer.new(usertype).as_json, rating: get_avg_rating_from_reviews(usertype.reviews) }
       end
+
       info
     end
   end
 
   def self.remember(user)
     user.remember
-    cookies.permanent.encrypted[:user_id] = user.id
-    cookies.permanent[:remember_token] = user.remember_token
+    # cookies.permanent.encrypted[:user_id] = user.id
+    # cookies.permanent[:remember_token] = user.remember_token
   end
 
   def self.forget(user)
     user.forget
-    cookies.delete(:user_id)
-    cookies.delete(:remember_token)
+    # cookies.delete(:user_id)
+    # cookies.delete(:remember_token)
   end
 
   def self.check_user_find_nil(id)
@@ -79,6 +77,15 @@ class Helpers < ApplicationController
   end
 
   def self.get_all_info_map(z)
-    z.map { |x| { profile: x.user, info: x, courses: x.courses, reviews: x.reviews, posts: x.posts, educations: x.educations, rating: get_avg_rating_from_reviews(x.reviews) } }
+    z.map { |x| { info: TeacherSerializer.new(x).as_json, rating: get_avg_rating_from_reviews(x.reviews) } }
+    # z.map { |x| { profile: x.user, info: x, courses: x.courses, reviews: x.reviews, posts: x.posts, educations: x.educations, rating: get_avg_rating_from_reviews(x.reviews) } }
+  end
+
+  def self.get_all_posts_map(z)
+    z.map { |x| PostSerializer.new(x).as_json }
+  end
+
+  def self.get_all_reviews_map(z)
+    z.map { |x| ReviewSerializer.new(x).as_json }
   end
 end

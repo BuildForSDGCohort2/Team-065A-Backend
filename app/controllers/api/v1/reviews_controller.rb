@@ -14,7 +14,21 @@ class Api::V1::ReviewsController < ApplicationController
     else
       render json: { status: 'Error', message: 'Course creation Failed', more: @review.errors.full_messages }
     end
-      end
+  end
+
+  def show
+    params[:id].nil? ? show_all_reviews : show_all_reviews_by_a_user
+  end
+
+  def show_all_reviews_by_a_user
+    @user = Helpers.check_user_find_nil(params[:id])
+    @review = @user.userref.reviews
+    render json: { status: 'Success', message: 'Successfully filtered', data: Helpers.get_all_reviews_map(@review) }
+  end
+
+  def show_all_reviews
+    render json: { status: 'Success', message: 'Successfully filtered', data: Helpers.get_all_reviews_map(Review.all) }
+  end
 
   def update
     @user = Helpers.check_user_find_nil(params[:id])

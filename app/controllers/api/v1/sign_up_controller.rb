@@ -27,7 +27,7 @@ class Api::V1::SignUpController < ApplicationController
 
     # if user is valid , save to the database else send an error response
     if check_user_type?
-      render json: { status: 'Success', message: 'Succesful Signup', data: @user }
+      render json: { status: 'Success', message: 'Succesful Signup', data: UserSerializer.new(@user).as_json }
     else
       render json: { status: 'Error', message: 'Sign up Failed', more: @user.errors.full_messages }
     end

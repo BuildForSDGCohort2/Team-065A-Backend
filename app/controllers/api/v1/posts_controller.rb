@@ -12,6 +12,20 @@ class Api::V1::PostsController < ApplicationController
     end
   end
 
+  def show
+    params[:id].nil? ? show_all_posts : show_all_posts_by_a_single_teacher
+  end
+
+  def show_all_posts_by_a_single_teacher
+    @user = Helpers.check_user_find_nil(params[:id])
+    @post = @user.userref.posts
+    render json: { status: 'Success', message: 'Successfully filtered', data: Helpers.get_all_posts_map(@post) }
+  end
+
+  def show_all_posts
+    render json: { status: 'Success', message: 'Successfully filtered', data: Helpers.get_all_posts_map(Post.all) }
+  end
+
   def update
     @user = Helpers.check_user_find_nil(params[:id])
     @post = @user.userref.posts[params[:no].to_i]

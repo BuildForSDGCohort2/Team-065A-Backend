@@ -5,7 +5,7 @@ class Api::V1::ParentsController < ApplicationController
     @user = Helpers.check_user_find_nil(params[:id])
     @other = @user.userref
     if @other.update(user_params)
-      render json: { status: 'Success', message: 'Updated Successfully', data: @other }
+      render json: { status: 'Success', message: 'Updated Successfully', data: OtherSerializer.new(@other).as_json }
     else
       render json: { status: 'Error', message: 'Error updating', data: @other.errors.full_messages }
     end

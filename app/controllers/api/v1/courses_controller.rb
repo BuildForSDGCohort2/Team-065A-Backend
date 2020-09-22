@@ -17,7 +17,7 @@ class Api::V1::CoursesController < ApplicationController
     usertype.courses << newcourse
     @course = usertype.courses.last
     if @course.save
-      render json: { status: 'Success', message: 'Successfully created', data: @course }
+      render json: { status: 'Success', message: 'Successfully created', data: CourseSerializer.new(@course).as_json }
     else
       render json: { status: 'Error', message: 'Course creation Failed', more: @course.errors.full_messages }
     end
@@ -34,7 +34,7 @@ class Api::V1::CoursesController < ApplicationController
     @user = Helpers.check_user_find_nil(params[:id])
     @course = @user.userref.courses[params[:no].to_i]
     if @course.update(coursename: params[:coursename])
-      render json: { status: 'Success', message: 'Updated Successfully', data: @course }
+      render json: { status: 'Success', message: 'Updated Successfully', data: CourseSerializer.new(@course).as_json }
     else
       render json: { status: 'Error', message: 'Error updating', data: @course.errors.full_messages }
     end
