@@ -80,25 +80,27 @@ includes the email to be sent to the user, hence the token would be used in the 
 
 ---
 
-| Endpoints       | Requests | Hash      | Params                                                                  |
-| --------------- | -------- | --------- | ----------------------------------------------------------------------- |
-| sign_in         | C        | login     | email, password,remember                                                |
-| sign_up         | C        | users     | email, password, password_confirmation, phone, full_name, user_type     |
-| users           | RUD      | update    | id, email, gender, address, phone, avatar, state, country               |
-| teachers        | RU       | ---       | id, description                                                         |
-| parents         | U        | user      | age, level, mycourses                                                   |
-| students        | U        | student   | age, level, mycourses                                                   |
-| schools         | U        | user      | age, level, mycourses                                                   |
-| others          | U        | user      | age, level, mycourses                                                   |
-| reviews         | CRUD     | review    | id, no, content, rating, owner                                          |
-| educations\*    | CUD      | education | id, no, institution, year_from, year_to, certificate, certificate_proof |
-| posts           | CRUD     | post      | id, no, title, content                                                  |
-| courses\*       | CRUD     | ---       | id, no,coursename                                                       |
-| forgot_password | CU       | users     | id, email\*(no hash on this),password,password_confirmation             |
+| Endpoints       | Requests | Hash      | Params                                                                           |
+| --------------- | -------- | --------- | -------------------------------------------------------------------------------- |
+| sign_in         | C        | login     | email, password,remember                                                         |
+| sign_up         | C        | users     | email, password, password_confirmation, phone, full_name, user_type, mobile\*\*  |
+| users           | RUD      | update    | id, email, gender, address, phone, avatar, state, country, user_type, mobile\*\* |
+| teachers        | RU       | ---       | id, description                                                                  |
+| parents         | U        | user      | age, level, mycourses                                                            |
+| students        | U        | student   | age, level, mycourses                                                            |
+| schools         | U        | user      | age, level, mycourses                                                            |
+| others          | U        | user      | age, level, mycourses                                                            |
+| reviews         | CRUD     | review    | id, no, content, rating, owner                                                   |
+| educations\*    | CUD      | education | id, no, institution, year_from, year_to, certificate, certificate_proof          |
+| posts           | CRUD     | post      | id, no, title, content                                                           |
+| courses\*       | CRUD     | ---       | id, no,coursename                                                                |
+| forgot_password | CU       | users     | id, email\*(no hash on this),password,password_confirmation                      |
 
 <br>
 
 \* - Only for teachers
+
+\*\* no hash on this, use it like that. the **mobile** param accepts boolean value **true** or **false**
 
 --- - no hash use the params like that
 

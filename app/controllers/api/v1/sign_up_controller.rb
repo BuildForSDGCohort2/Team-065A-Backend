@@ -9,6 +9,11 @@ class Api::V1::SignUpController < ApplicationController
       return
     end
 
+    if params[:mobile]
+      mobile_sign_up
+      return
+    end
+
     # check if password == passwordconfirm
     if params[:users][:password_confirmation] != params[:users][:password]
       render json: { status: 'Error', message: 'Password does not match' }
@@ -50,5 +55,14 @@ class Api::V1::SignUpController < ApplicationController
   def check_user_type?
     @user.userref = @usertype_models[@usertypes.find_index(params[:users][:user_type])].new
     @user.save
+  end
+
+  def mobile_sign_up
+    @user = User.new(user_params)
+    if @user.save
+      render json: { status: 'Success', message: 'Succesful Signup', data: UserSerializer.new(@user).as_json }
+    else
+      render json: { status: 'Error', message: 'Sign up Failed', more: @user.errors.full_messages }
+    end
   end
 end

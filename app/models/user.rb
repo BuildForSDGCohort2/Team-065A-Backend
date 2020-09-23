@@ -19,7 +19,7 @@ class User < ApplicationRecord
   VALID_PHONE_REGEX = /\A((\+\d{11,15})|(^+\d{8,15}))\z/.freeze
 
   # validate usertype
-  validates :user_type, presence: true
+  validates :user_type, presence: true, if: :user_type
 
   # validate phone allow_blank since its optional on the signup page
   validates :phone, allow_blank: true, format: { with: VALID_PHONE_REGEX }
