@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
       if params[:mobile]
         return unless check_user_type?
       end
-      render json: { status: 'Success', message: 'Updated Successfully', data: @user }
+      render json: { status: 'Success', message: 'Updated Successfully', data: UserSerializer.new(@user).as_json }
     else
       render json: { status: 'Error', message: 'Error updating', data: @user.errors.full_messages }
     end
