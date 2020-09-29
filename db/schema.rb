@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_29_154741) do
+ActiveRecord::Schema.define(version: 2020_09_11_103438) do
 
   create_table "courses", force: :cascade do |t|
     t.string "coursename"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_154741) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "teacher_id"
-    t.text "content", limit: 16777215
+    t.text "content", limit: 17179869183
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
