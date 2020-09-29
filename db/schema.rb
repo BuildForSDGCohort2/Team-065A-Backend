@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2020_09_11_103438) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "teacher_id"
-    t.text "content", limit: 17179869183
+    t.text "content", limit: 16777215
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
