@@ -16,6 +16,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'carrierwave'
 gem 'active_model_serializers'
 gem 'jwt'
+gem 'faker'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -36,7 +37,6 @@ group :development do
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'faker'
   # Use sqlite3 as the database for Active Record
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
