@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: team065abackendcloud
+  api_key: '652979297555672'
+  api_secret: F5y1aSq4i0M6HKjIaio95axtqYg
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: team065abackendcloud
+  api_key: '652979297555672'
+  api_secret: F5y1aSq4i0M6HKjIaio95axtqYg
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: team065abackendcloud
+  api_key: '652979297555672'
+  api_secret: F5y1aSq4i0M6HKjIaio95axtqYg
+  enhance_image_tag: true
+  static_file_support: false

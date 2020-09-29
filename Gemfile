@@ -17,6 +17,7 @@ gem 'carrierwave'
 gem 'active_model_serializers'
 gem 'jwt'
 gem 'faker'
+gem 'cloudinary'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
