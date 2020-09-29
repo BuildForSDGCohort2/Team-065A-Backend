@@ -33,6 +33,10 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  host = 'localhost:3000' # Local server
+
+  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -41,7 +45,6 @@ Rails.application.configure do
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
-
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
