@@ -30,7 +30,7 @@ all_teachers = []
     country: Faker::Address.country,
     state: Faker::Address.state,
     address: Faker::Address.full_address,
-    avatar: Faker::Avatar.image
+    avatar: File.open(Faker::Avatar.image)
   )
 
   user.userref = usertype_models[rand_index].new
@@ -48,7 +48,7 @@ all_teachers = []
       year_from: year_fr,
       year_to: year_fr + years,
       certificate: Faker::Educator.degree,
-      certificate_proof: Faker::Avatar.image
+      certificate_proof: File.open(Faker::Avatar.image)
     )
     user.userref.posts << Post.create(
       title: Faker::Educator.course_name,
