@@ -84,7 +84,7 @@ includes the email to be sent to the user, hence the token would be used in the 
 | --------------- | -------- | --------- | -------------------------------------------------------------------------------- |
 | sign_in         | C        | login     | email, password,remember                                                         |
 | sign_up         | C        | users     | email, password, password_confirmation, phone, full_name, user_type, mobile\*\*  |
-| users           | RUD      | update    | id, email, gender, address, phone, avatar, state, country, user_type, mobile\*\* |
+| users           | CRD      | update    | id, email, gender, address, phone, avatar, state, country, user_type, mobile\*\* |
 | teachers        | RU       | ---       | id, description                                                                  |
 | parents         | U        | user      | age, level, mycourses                                                            |
 | students        | U        | student   | age, level, mycourses                                                            |
